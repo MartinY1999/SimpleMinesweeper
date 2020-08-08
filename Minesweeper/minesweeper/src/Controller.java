@@ -40,6 +40,11 @@ public class Controller {
     }
 
     public void click(int row, int col) {
+        if (row < 0 || row >= this.grid.getMatrix().length || col < 0 || col >= this.grid.getMatrix().length) {
+            System.out.println("Invalid input! Try again.");
+            return;
+        }
+
         Cell current = this.grid.getMatrix()[row][col];
 
         if (this.visitedCells.contains(current)) {
@@ -74,7 +79,7 @@ public class Controller {
 
     // using Flood fill algorithm to find all safe adjacent cells
     private void floodFill(int x, int y, Cell cell) {
-        if (x < 0 || x >= this.grid.getMatrix().length || y < 0 || y >= this.grid.getMatrix().length)
+        if (x < 0 || x >= this.grid.getBoardLength() || y < 0 || y >= this.grid.getBoardLength())
             return;
         if (this.grid.countNeighbours(this.grid.getMatrix()[x][y]) != 0
                 || this.visitedCells.contains(this.grid.getMatrix()[x][y]))
